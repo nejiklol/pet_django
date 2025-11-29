@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "pet_django"
+version = "0.1.0"
+description = ""
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.13"
+Django = "^5.0"
+djangorestframework = "*"
+psycopg2-binary = "*"
+drf-spectacular = "*"
+uvicorn = "*"
+gunicorn = "*"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-django = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

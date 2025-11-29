@@ -1,0 +1,5 @@
+services:
+  ept_backend:
+    image: ${DOCKER_IMAGE}_back:${CI_COMMIT_SHORT_SHA}
+    build:
+      context: ../../.

@@ -1,0 +1,39 @@
+services:
+  backend:
+    image: pet_django:local
+    build:
+      context: ../../.
+    container_name: pet-backend
+    env_file: ../../.env
+    ports:
+      - "${BACKEND_PORT_EXTERNAL}:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend/app:/app/app
+    networks:
+      - internal_net
+    command: >
+      bash -c "make -f Makefile up-entrypoint"
+
+  postgres:
+    image: postgres:16
+    container_name: pet-postgres
+    env_file: ../../.env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - internal_net
+
+networks:
+  internal_net:
+    name: pet_backend_django
+
+volumes:
+  postgres_data:
